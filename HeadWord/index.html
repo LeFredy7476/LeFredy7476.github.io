@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HeadWord</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="settings">
-        <input type="file" name="fileloader" id="fileloader" accept=".txt, text/plain">
-        <input type="number" name="timer" id="timer">
+        <label for="fileloader" id="file"><input type="file" name="fileloader" id="fileloader" accept=".txt, text/plain" required>Load Words</label>
+        <div id="wordcount"></div>
+        <div style="flex-grow: 1;"></div>
+        <input type="number" name="timer" id="timer" placeholder="time" step="10" min="10" max="300">
+        <button id="fullscreen" onclick="toggleFullscreen()">Fullscreen</button>
         <button id="start">Start</button>
-        <button id="stop">Stop</button>
     </div>
     <div id="game">
-        <div id="clock">0</div>
-        <div id="word"></div>
+        <div id="clock"></div>
+        <div id="word">HeadWord<span style="font-size: 2rem;"> par LeFredy</span></div>
         <button id="win"></button>
         <button id="lose"></button>
     </div>

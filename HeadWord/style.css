@@ -1,3 +1,7 @@
+* {
+    font-family: monospace !important;
+    font-weight: 900;
+}
 
 :root {
     --soft-linen: #f4f0e4ff;
@@ -19,12 +23,66 @@ html {
 body {
     margin: 0px;
     background-color: var(--soft-linen);
-    padding: 2rem;
-    gap: 2rem;
+    padding: 1rem;
+    gap: 1rem;
     display: grid;
     grid-template-rows: auto 1fr;
     box-sizing: border-box;
     min-height: 100vh;
+    color: var(--ink-black);
+}
+
+button, input {
+    color: var(--ink-black);
+}
+
+input[type="file"] {
+    display: none
+}
+
+#settings {
+    display: flex;
+    align-items: stretch;
+    gap: 1rem;
+    font-size: 1.5rem;
+}
+
+#settings label, #settings #wordcount {
+    font-size: 1.5rem;
+    padding: calc(5px + 0.25rem) calc(5px + 0.5rem);
+}
+
+#settings button {
+    font-size: 1.5rem;
+    padding: 0.25rem 0.5rem;
+}
+
+#start, #fullscreen {
+    background-color: var(--air-force-blue);
+    border: 5px solid var(--air-force-blue);
+}
+
+#file {
+    background-color: var(--light-coral);
+}
+
+#file:has(#fileloader:valid) {
+    background-color: var(--verdigris);
+}
+
+#timer {
+    background-color: var(--soft-linen);
+    border: 5px solid var(--ink-black);
+    font-size: 1.5rem;
+    width: 6rem;
+    padding: 0.25rem 0.5rem;
+    border-left: none;
+    border-right: none;
+    border-top: transparent;
+}
+
+#fullscreen {
+    background-color: transparent;
 }
 
 #game {
@@ -42,7 +100,6 @@ body {
     padding: 0px;
     margin: 0px;
     background-color: transparent;
-    font-family: monospace;
     font-size: 10rem;
     /* opacity: 0.4; */
     transition: cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
@@ -86,11 +143,36 @@ body {
     font-size: 4rem;
     place-content: center;
     text-align: center;
-    /* display: flex; */
+    display: flex;
+    flex-direction: column;
     position: absolute;
     top: 0px;
     bottom: 0px;
     left: 0px;
     right: 0px;
     user-select: none;
+}
+
+#word #list {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    padding: 2rem;
+    flex-wrap: wrap;
+}
+
+#word #list span {
+    padding: 0.25rem 0.5rem;
+    background-color: var(--air-force-blue);
+}
+
+#word #list span[win="true"] {
+    background-color: var(--verdigris);
+}
+
+#word #list span[win="false"] {
+    background-color: var(--light-coral);
 }
