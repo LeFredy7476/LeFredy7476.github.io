@@ -28,7 +28,9 @@ body {
     display: grid;
     grid-template-rows: auto 1fr;
     box-sizing: border-box;
-    min-height: 100vh;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
     color: var(--ink-black);
 }
 
@@ -238,4 +240,17 @@ input[type="file"] {
 
 #word #list span[win="false"] {
     background-color: var(--light-coral);
+}
+
+@media screen and (orientation: portrait) {
+  /* CSS styles to apply when the device is in portrait mode */
+  body {
+    /* background-color: red !important; */
+  }
+  #lose::before {
+    transform: rotate(-90deg);
+  }
+  #win::before {
+    transform: rotate(90deg);
+  }
 }
