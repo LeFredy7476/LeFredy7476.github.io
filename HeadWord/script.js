@@ -9,6 +9,7 @@ const wordCountDisplay = document.querySelector("#wordcount");
 const clockDisplay = document.querySelector("#clock");
 const winbtn = document.querySelector("#win");
 const losebtn = document.querySelector("#lose");
+const gameElem = document.querySelector("#game");
 
 var inGame = false;
 var currentWord = "";
@@ -23,7 +24,7 @@ const endAudio = new Audio("scroll_003.ogg");
 
 function getRandomWord() {
     if (tempWordList.length == 0) {
-        endResult();
+        endResult(false);
         return;
     }
     const randomIndex = Math.floor(Math.random() * tempWordList.length);
@@ -58,11 +59,11 @@ function readWords() {
 fileloaderInput.addEventListener("change", readWords);
 
 function tickdown() {
+    remainingTime--;
     if (remainingTime == 0) {
         endAudio.play();
-        endResult();
+        endResult(true);
     } else {
-        remainingTime--;
         clockDisplay.innerHTML = `${remainingTime}`;
     }
 }
@@ -72,6 +73,7 @@ startbtn.addEventListener("click", function(){
         if (wordList.length == 0) {
             return readWords();
         }
+        gameElem.setAttribute("ingame", "true");
         tempWordList.length = 0;
         usedWords.length = 0;
         for (let i = 0; i < wordList.length; i++) {
@@ -89,7 +91,7 @@ startbtn.addEventListener("click", function(){
         clockDisplay.innerHTML = `${remainingTime}`;
         getRandomWord();
     } else {
-        endResult();
+        endResult(true);
     }
 });
 
@@ -121,17 +123,18 @@ losebtn.addEventListener("mousedown", function(){
     }
 });
 
-function endResult() {
+function endResult(unfinished) {
     window.clearInterval(interval);
+    gameElem.setAttribute("ingame", "false");
     inGame = false;
     clockDisplay.innerHTML = "Finished";
-    const score = `Win: ${winCount}, Lost: ${lostCount}`;
+    const score = `Guessed ${winCount} out of ${winCount+lostCount}`;
     var list = '<div id="list">';
     for (let i = 0; i < usedWords.length; i++) {
         const entry = usedWords[i];
         list += `<span win="${entry.win}">${entry.word}</span>`;
     }
-    list += `<span>${currentWord}</span>`
+    if (unfinished) list += `<span>${currentWord}</span>`;
     list += "</div>";
     wordDisplay.innerHTML = score + list;
 }

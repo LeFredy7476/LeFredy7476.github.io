@@ -63,10 +63,12 @@ input[type="file"] {
 #start, #fullscreen {
     background-color: var(--air-force-blue);
     border: 5px solid var(--air-force-blue);
+    cursor: pointer;
 }
 
 #file {
     background-color: var(--light-coral);
+    cursor: pointer;
 }
 
 #file:has(#fileloader:valid) {
@@ -139,7 +141,7 @@ input[type="file"] {
     width: calc(90vw - 1.5rem);
     transition: cubic-bezier(0.87, 0, 0.13, 1) 0.75s;
 }
-#win:active::before {
+#game[ingame="true"] #win:active::before {
     right: 0px;
     transition: ease-out 0.0s;
 }
@@ -159,32 +161,32 @@ input[type="file"] {
     width: calc(90vw - 1.5rem);
     transition: cubic-bezier(0.87, 0, 0.13, 1) 0.75s;
 }
-#lose:active::before {
+#game[ingame="true"] #lose:active::before {
     left: 0px;
     transition: ease-out 0.0s;
 }
 
-#win:active {
+#game[ingame="true"] #win:active {
     border-left-width: calc(90vw - 1.5rem);
     width: calc(90vw - 1.5rem);
     /* transition: linear 0s; */
 }
 
-#lose:active {
+#game[ingame="true"] #lose:active {
     border-right-width: calc(90vw - 1.5rem);
     width: calc(90vw - 1.5rem);
     /* transition: linear 0s; */
 }
 
-#game:active #win, #game:active #lose {
+#game:active #win,#game:active #lose {
     transition: ease-out 0.0s;
 }
 
-#game:has(#win:active) #lose {
+#game[ingame="true"]:has(#win:active) #lose {
     width: calc(10vw - 1.5rem);
 }
 
-#game:has(#lose:active) #win {
+#game[ingame="true"]:has(#lose:active) #win {
     width: calc(10vw - 1.5rem);
 }
 
