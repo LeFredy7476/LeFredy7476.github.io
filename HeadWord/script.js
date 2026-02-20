@@ -81,6 +81,10 @@ startbtn.addEventListener("click", function(){
         winCount = 0;
         lostCount = 0;
         remainingTime = parseInt(timerInput.value);
+        if (isNaN(remainingTime)) {
+            remainingTime = 60;
+            timerInput.value = 60;
+        }
         interval = window.setInterval(tickdown, 1000);
         clockDisplay.innerHTML = `${remainingTime}`;
         getRandomWord();
@@ -91,6 +95,8 @@ startbtn.addEventListener("click", function(){
 
 winbtn.addEventListener("mousedown", function(){
     if (inGame) {
+        winAudio.pause();
+        winAudio.currentTime = 0;
         winAudio.play();
         usedWords.push({
             win: true,
@@ -103,6 +109,8 @@ winbtn.addEventListener("mousedown", function(){
 
 losebtn.addEventListener("mousedown", function(){
     if (inGame) {
+        loseAudio.pause();
+        loseAudio.currentTime = 0;
         loseAudio.play();
         usedWords.push({
             win: false,

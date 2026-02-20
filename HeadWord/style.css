@@ -94,7 +94,8 @@ input[type="file"] {
     position: absolute;
     top: 0px;
     bottom: 0px;
-    width: calc(50% - 1rem);
+    width: calc(50vw - 1.5rem);
+    box-sizing: border-box;
     border: 5px solid;
     border-left-width: 5px;
     border-right-width: 5px;
@@ -103,25 +104,86 @@ input[type="file"] {
     background-color: transparent;
     font-size: 10rem;
     /* opacity: 0.4; */
-    transition: cubic-bezier(0.16, 1, 0.3, 1) 0.5s;
+    transition: cubic-bezier(0.87, 0, 0.13, 1) 0.75s;
+    /* transition: cubic-bezier(0.16, 1, 0.3, 1) 1.5s; */
 }
 #win {
     left: 0px;
     border-right-style: none;
+    border-right-width: 0px;
     border-color: var(--verdigris);
     color: var(--verdigris);
 }
 #lose {
     right: 0px;
     border-left-style: none;
+    border-left-width: 0px;
     border-color: var(--light-coral);
     color: var(--light-coral);
 }
 
-#win:active, #lose:active {
-    border-left-width: 20vw;
-    border-right-width: 20vw;
-    transition: linear 0s;
+#win::before {
+    content: "Guessed";
+    text-transform: uppercase;
+    position: absolute;
+    color: var(--soft-linen);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid red; */
+    top: 0px;
+    bottom: 0px;
+    right: calc(200vw - 1.5rem);
+    width: calc(90vw - 1.5rem);
+    transition: cubic-bezier(0.87, 0, 0.13, 1) 0.75s;
+}
+#win:active::before {
+    right: 0px;
+    transition: ease-out 0.0s;
+}
+
+#lose::before {
+    content: "Skipped";
+    text-transform: uppercase;
+    position: absolute;
+    color: var(--soft-linen);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px solid red; */
+    top: 0px;
+    bottom: 0px;
+    left: calc(200vw - 1.5rem);
+    width: calc(90vw - 1.5rem);
+    transition: cubic-bezier(0.87, 0, 0.13, 1) 0.75s;
+}
+#lose:active::before {
+    left: 0px;
+    transition: ease-out 0.0s;
+}
+
+#win:active {
+    border-left-width: calc(90vw - 1.5rem);
+    width: calc(90vw - 1.5rem);
+    /* transition: linear 0s; */
+}
+
+#lose:active {
+    border-right-width: calc(90vw - 1.5rem);
+    width: calc(90vw - 1.5rem);
+    /* transition: linear 0s; */
+}
+
+#game:active #win, #game:active #lose {
+    transition: ease-out 0.0s;
+}
+
+#game:has(#win:active) #lose {
+    width: calc(10vw - 1.5rem);
+}
+
+#game:has(#lose:active) #win {
+    width: calc(10vw - 1.5rem);
 }
 
 #clock {
